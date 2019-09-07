@@ -1,0 +1,92 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue',Helvetica,sans-serif;
+    font-size: 17px;
+    line-height: 21px;
+    color: #000;
+    background-color: #efeff4;
+    -webkit-overflow-scrolling: touch;
+}
+p {
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #8f8f94;
+}
+a {
+    text-decoration: none;
+    color: #007aff;
+}
+.mui-content {
+    background-color: #efeff4;
+    -webkit-overflow-scrolling: touch;
+    
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.subTitile{
+    position: relative;
+    border-left: 5px solid #1296db;
+    color:#1296db;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+}
+.event-content, .scoreBox {
+    margin: 10px;
+    padding: 10px;
+    background: #fff;
+    transition: .2s;
+}
+.eventInfo, .currentEventScore {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 10px 0;
+}
+.currentEventScore .scoreHeader {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #ddd;
+}
+.scoreHeader >.item {
+    width: 25%;
+    text-align: center;
+    color: #555;
+    font-weight: bold;
+    padding: 5px 0 8px;
+}
+.currentEventScore .scoreBody {
+    font-size: 15px;
+}
+.scoreBody > .scoreRow {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+}
+.scoreBody > .scoreRow:nth-of-type(even) {
+    background-color: #c5e8ff38;
+}
+.scoreRow >.item {
+    width: 100%;
+    text-align: center;
+    color: #333;
+}
+.errorBox{
+    padding: 15px 0;
+    text-align: center
+}
+.errorBox >img{
+    width: 150px;
+    height: 150px;
+    /* border-radius: 50%; */
+    filter: grayscale(100%)  opacity(50%)
+}
+.errorBox >.tips{
+    margin-top: 10px;
+    text-align: center;
+    font-size: 17px;
+    color: #555
+}

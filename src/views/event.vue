@@ -1,0 +1,89 @@
+<template>
+  <div>
+      <eventBaseInfo :eventInfo="eventInfo" />
+      <eventRanking 
+        v-if="cureventId!=0" 
+        :cureventId="cureventId"
+        @putData="getScoreData" />
+      <highScore 
+        v-if="cureventId!=0" 
+        :cureventId="cureventId" />
+      <eventIdol 
+        v-if="cureventId!=0 && eventInfo.schedule.beginDate" 
+        :cureventId="cureventId" 
+        :addIdolDate="eventInfo.schedule.beginDate" 
+      />
+      <eventScoreChart 
+        v-if="cureventId!=0 && eventScore.length>0" 
+        :cureventId="cureventId"
+        :eventScore="eventScore" 
+        :eventBaseInfo="eventInfo"
+      />
+  </div>
+</template>
+
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import { mapActions, mapGetters } from 'vuex';
+import { Loading } from 'element-ui';
+import eventBaseInfo from '@/components/eventBaseInfo.vue';
+import eventRanking from '@/components/eventRanking.vue';
+import highScore from '@/components/highScore.vue';
+import eventIdol from '@/components/eventIdol.vue';
+import eventScoreChart from '@/components/eventScoreChart.vue';
+
+@Component({
+  async created() {
+    try {
+      const {data} = await (this as any).axios(`events`);
+      let data_count;
+      if(data[data.length - 1].type === 3 || data[data.length - 1].id === 4){
+        data_count = await (this as any).axios(`events/${data[data.length - 1].id}/rankings/summaries/eventPoint`);
+      }
+      console.log(data[data.length - 1].id);
+      this.$store.dispatch('changeCurEventId', data[data.length - 1].id);
+      (this as any).cureventId = data[data.length - 1].id;
+      (this as any).eventInfo = data[data.length - 1];
+      (this as any).eventInfo.count = data_count.data[data_count.data.length - 1].count;
+    } catch (error) {
+      this.$message("网络错误");
+      console.log(error);
+    }
+  },
+  data() {
+    return {
+      eventInfo: {},
+      cureventId: 0,
+      eventScore:[],
+    }
+  },
+  components: {
+    eventBaseInfo,
+    eventRanking,
+    highScore,
+    eventIdol,
+    eventScoreChart,
+  },
+  watch: {
+    '$store.state.isLoading': function() {
+      // console.log(this.$store.getters.loadingStatus)
+      if (this.$store.getters.loadingStatus) {
+        Loading.service({
+          text: '正在努力加载..',
+        });
+      } else {
+        Loading.service({}).close();
+      };
+    },
+  },
+  methods: {
+      ...mapActions(['changeCurEventId']),
+      getScoreData(data){
+        (this as any).eventScore = data;
+      }
+  },
+})
+export default class Event extends Vue {
+
+}
+</script>
