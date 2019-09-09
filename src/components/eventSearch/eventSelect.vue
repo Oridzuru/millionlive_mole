@@ -53,7 +53,7 @@ import { Loading } from 'element-ui';
             //     }
             // })
             let arr = [];
-            for(let i=0;i<data.length - 1;i++){
+            for(let i=0;i<data.length;i++){
                 if(data[i].type === 3 || data[i].type === 4){
                     arr.push(data[i])
                 }
