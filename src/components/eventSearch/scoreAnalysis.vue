@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div class="scoreBox">
-      <div class="subTitile">分数分析</div>
+      <div class="subTitile">每日增速分数</div>
       <div v-if="score.length > 0" class="cBox">
         <div class="cHead">
           <div class="item">档位</div>
