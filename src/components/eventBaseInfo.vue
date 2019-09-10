@@ -24,7 +24,7 @@
                     <div class="item-lb">活动类型：</div>
                     <div class="item-ct">{{eventInfo.type | eventTypeFormat}}</div>
                 </div>
-                <div class="row" v-if="eventInfo.appealTyp">
+                <div class="row" v-if="eventInfo.appealType">
                     <div class="item-lb">分数奖励属性：</div>
                     <div class="item-ct">
                         <span v-if="eventInfo.appealType==1" style="color:#ff5f5f;font-weight: bold">Vocal</span>
