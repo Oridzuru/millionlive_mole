@@ -6,10 +6,6 @@
                 <div class="chartview">
                     <div class="chart" id="chart_1"></div>
                 </div>
-                <!-- <div class="errorBox">
-                    <img src="../assets/images/status/error.jpg">
-                    <div class="tips">Sorry，暂无当前活动数据</div>
-                </div> -->
             </div>
         </div>
     </div>

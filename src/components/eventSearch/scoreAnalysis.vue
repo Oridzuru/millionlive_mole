@@ -51,7 +51,6 @@ import { Component, Vue } from 'vue-property-decorator';
   },
   watch: {
     'eventId': async function(){
-      console.log((this as any).eventId);
       (this as any).getData((this as any).eventId)
     }
   },
@@ -156,7 +155,6 @@ import { Component, Vue } from 'vue-property-decorator';
 				})
         result[index].average = Math.ceil(tempArr/length);
 			});
-      console.log(result);
       
       (this as any).score = result;
     }

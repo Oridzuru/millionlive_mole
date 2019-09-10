@@ -1,8 +1,8 @@
 <template>
   <div class="mui-content">
-    <pageHeader/>
-    <router-view />
-    <pageFooter/>
+    <pageHeader></pageHeader>
+    <router-view></router-view>
+    <pageFooter></pageFooter>
   </div>
 </template>
 

@@ -28,8 +28,8 @@
                     <div class="item-lb">分数奖励属性：</div>
                     <div class="item-ct">
                         <span v-if="eventInfo.appealType==1" style="color:#ff5f5f;font-weight: bold">Vocal</span>
-                        <span v-if="eventInfo.appealType==1" style="color:#4568ff;font-weight: bold">Dance</span>
-                        <span v-if="eventInfo.appealType==1" style="color:#ffc045;font-weight: bold">Visual</span>
+                        <span v-if="eventInfo.appealType==2" style="color:#4568ff;font-weight: bold">Dance</span>
+                        <span v-if="eventInfo.appealType==3" style="color:#ffc045;font-weight: bold">Visual</span>
                     </div>
                 </div>
                 <div class="row" v-if="eventInfo.count">

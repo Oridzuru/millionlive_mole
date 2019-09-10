@@ -2,23 +2,29 @@
   <div>
       <eventBaseInfo :eventInfo="eventInfo" />
       <eventRanking 
-        v-if="cureventId!=0" 
+        v-if="cureventId!=0 && (eventInfo.type==4 || eventInfo.type==3)" 
         :cureventId="cureventId"
-        @putData="getScoreData" />
+        @putData="getScoreData"
+      >
+      </eventRanking>  
       <highScore 
-        v-if="cureventId!=0" 
-        :cureventId="cureventId" />
+        v-if="cureventId!=0 && (eventInfo.type==4 || eventInfo.type==3)" 
+        :cureventId="cureventId"
+      >
+      </highScore>
       <eventIdol 
         v-if="cureventId!=0 && eventInfo.schedule.beginDate" 
         :cureventId="cureventId" 
         :addIdolDate="eventInfo.schedule.beginDate" 
-      />
+      >
+      </eventIdol>
       <eventScoreChart 
         v-if="cureventId!=0 && eventScore.length>0" 
         :cureventId="cureventId"
         :eventScore="eventScore" 
         :eventBaseInfo="eventInfo"
-      />
+      >
+      </eventScoreChart>
   </div>
 </template>
 
@@ -40,7 +46,6 @@ import eventScoreChart from '@/components/eventScoreChart.vue';
       if(data[data.length - 1].type === 3 || data[data.length - 1].id === 4){
         data_count = await (this as any).axios(`events/${data[data.length - 1].id}/rankings/summaries/eventPoint`);
       }
-      console.log(data[data.length - 1].id);
       this.$store.dispatch('changeCurEventId', data[data.length - 1].id);
       (this as any).cureventId = data[data.length - 1].id;
       (this as any).eventInfo = data[data.length - 1];
@@ -66,7 +71,6 @@ import eventScoreChart from '@/components/eventScoreChart.vue';
   },
   watch: {
     '$store.state.isLoading': function() {
-      // console.log(this.$store.getters.loadingStatus)
       if (this.$store.getters.loadingStatus) {
         Loading.service({
           text: '正在努力加载..',

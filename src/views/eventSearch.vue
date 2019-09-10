@@ -4,16 +4,19 @@
     <eventBaseInfo 
         v-if="selectEventId != 0 && Object.keys(eventInfo).length !=0"
         :eventInfo="eventInfo"
-    />
+    >
+    </eventBaseInfo>
     <eventIdol 
         v-if="selectEventId!=0 && Object.keys(eventInfo).length !=0" 
         :cureventId="selectEventId" 
         :addIdolDate="eventInfo.schedule.beginDate" 
-    />
+    >
+    </eventIdol>
     <scoreAnalysis
         v-if="selectEventId!=0"
         :eventId="selectEventId"
-     />
+    >
+    </scoreAnalysis>
   </div>
 </template>
 
