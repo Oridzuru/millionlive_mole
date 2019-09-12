@@ -12,7 +12,7 @@
                     <div class="item-lb">活动开始时间：</div>
                     <div class="item-ct">{{eventInfo.schedule.beginDate | formatDate }}</div>
                 </div>
-                <div class="row">
+                <div class="row" v-if="eventInfo.schedule.boostBeginDate">
                     <div class="item-lb">后半战时间：</div>
                     <div class="item-ct">{{eventInfo.schedule.boostBeginDate | formatDate}} </div>
                 </div>

@@ -45,11 +45,11 @@ import eventScoreChart from '@/components/eventScoreChart.vue';
       let data_count;
       if(data[data.length - 1].type === 3 || data[data.length - 1].id === 4){
         data_count = await (this as any).axios(`events/${data[data.length - 1].id}/rankings/summaries/eventPoint`);
+        (this as any).eventInfo.count = data_count.data[data_count.data.length - 1].count;
       }
       this.$store.dispatch('changeCurEventId', data[data.length - 1].id);
       (this as any).cureventId = data[data.length - 1].id;
       (this as any).eventInfo = data[data.length - 1];
-      (this as any).eventInfo.count = data_count.data[data_count.data.length - 1].count;
     } catch (error) {
       this.$message("网络错误");
       console.log(error);

@@ -38,9 +38,10 @@ import { Component, Vue } from 'vue-property-decorator';
             let curEventId = (this as any).cureventId;
             let idata;
             (this as any).idol = [];
+            console.log(this.$store.getters.getIdolList.length)
             if(this.$store.getters.getIdolList.length === 0){
                 try {
-                    const {data} = await (this as any).axios(`cards?extraType=2,3`);
+                    const {data} = await (this as any).axios(`cards`);
                     idata = data;
                     this.$store.dispatch('setIdolList', data);
                 } catch (error) {
