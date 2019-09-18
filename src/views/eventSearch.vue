@@ -17,6 +17,11 @@
         :eventId="selectEventId"
     >
     </scoreAnalysis>
+    <eventRanking
+        v-if="selectEventId!=0 && (eventInfo.type==4 || eventInfo.type==3)" 
+        :cureventId="selectEventId"
+    >
+    </eventRanking>  
   </div>
 </template>
 
@@ -27,6 +32,7 @@ import eventSelect from '@/components/eventSearch/eventSelect.vue';
 import eventBaseInfo from '@/components/eventBaseInfo.vue';
 import eventIdol from '@/components/eventIdol.vue';
 import scoreAnalysis from '@/components/eventSearch/scoreAnalysis.vue';
+import eventRanking from '@/components/eventRanking.vue';
 @Component({
     data() {
         return {
@@ -60,6 +66,7 @@ import scoreAnalysis from '@/components/eventSearch/scoreAnalysis.vue';
         eventBaseInfo,
         eventIdol,
         scoreAnalysis,
+        eventRanking,
     },
 })
 export default class EventSearch extends Vue {

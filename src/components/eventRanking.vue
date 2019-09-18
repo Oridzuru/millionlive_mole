@@ -20,7 +20,7 @@
             </div>
             <div class="errorBox" v-if="rankData.length == 0">
                 <img src="../assets/images/status/error.jpg">
-                <div class="tips">Sorry，暂无当前活动数据</div>
+                <div class="tips">请稍等..</div>
             </div>
         </div>
   </div>
@@ -32,35 +32,44 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component({
     props:['cureventId'],
     async created() {
-        let curEventId = (this as any).cureventId;
-        try {
-            const {data} = await (this as any).axios(`events/${curEventId}/rankings/logs/eventPoint/100,2500,5000,10000,25000,50000`);
-            if(data.length > 0){
-                // (this as any).rankData = data
-                for(let temp of data){
-                    if(temp.data.length>1){
-                        temp.someAgo = temp.data[temp.data.length-1].score - temp.data[temp.data.length-2].score
-                    }else{
-                        temp.someAgo = "暂无数据"
-                    }
-                    if(temp.data.length>48){
-                        temp.dayAgo = temp.data[temp.data.length-1].score - temp.data[temp.data.length-49].score
-                    }else{
-                        temp.dayAgo = "暂无数据"
-                    }
-                }
-                (this as any).rankData = data;
-                this.$emit('putData', (this as any).rankData);
-            }
-        } catch (error) {
-            this.$message("网络错误");
-            console.log(error);
-        }
-        
+        (this as any).getData();
     },
     data() {
         return {
             rankData: [],
+        }
+    },
+    methods: {
+        async getData(){
+            let curEventId = (this as any).cureventId;
+            try {
+                const {data} = await (this as any).axios(`events/${curEventId}/rankings/logs/eventPoint/100,2500,5000,10000,25000,50000`);
+                if(data.length > 0){
+                    // (this as any).rankData = data
+                    for(let temp of data){
+                        if(temp.data.length>1){
+                            temp.someAgo = temp.data[temp.data.length-1].score - temp.data[temp.data.length-2].score
+                        }else{
+                            temp.someAgo = "暂无数据"
+                        }
+                        if(temp.data.length>48){
+                            temp.dayAgo = temp.data[temp.data.length-1].score - temp.data[temp.data.length-49].score
+                        }else{
+                            temp.dayAgo = "暂无数据"
+                        }
+                    }
+                    (this as any).rankData = data;
+                    this.$emit('putData', (this as any).rankData);
+                }
+            } catch (error) {
+                this.$message("网络错误");
+                console.log(error);
+            }
+        }
+    },
+    watch: {
+        'cureventId': async function(){
+            (this as any).getData();
         }
     },
 })
