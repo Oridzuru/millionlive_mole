@@ -6,7 +6,7 @@ const BASE_URL: string = 'https://api.matsurihi.me/mltd/v1/';
 
 const instance = Axios.create({
     baseURL: BASE_URL,
-    timeout: 30000,
+    timeout: 60000,
 });
 axiosRetry(instance, {
     retries: 5,

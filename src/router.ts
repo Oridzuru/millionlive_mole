@@ -12,12 +12,15 @@ export default new Router({
     {
       path: '/',
       name: 'event',
-      component: Event,
+      component: () => import('./views/event.vue'),
+      // component: Event,
     },
     {
       path: '/eventSearch',
       name: 'eventSearch',
-      component: EventSearch,
+
+      component: () => import('./views/eventSearch.vue'),
+      // component: EventSearch,
     },
     // {
     //   path: '/about',

@@ -18,6 +18,10 @@
                     </div>
                 </div>
             </div>
+            <div class="lastUpdated" v-if="rankData.length > 0">
+                <span class="title">数据更新时间：</span>
+                <span class="date">{{rankData[0].data[rankData[0].data.length - 1].summaryTime | formatDate}}</span>
+            </div>
             <div class="errorBox" v-if="rankData.length == 0">
                 <img src="../assets/images/status/error.jpg">
                 <div class="tips">请稍等..</div>
@@ -72,6 +76,28 @@ import { Component, Vue } from 'vue-property-decorator';
             (this as any).getData();
         }
     },
+    filters:{
+        formatDate:function(value:Date){
+            if(value){
+                let format = new Date (new Date(value).getTime() + 1000);
+                let year: number | string = format.getFullYear();
+                let month: number | string = format.getMonth()+ 1;
+                let day :number | string = format.getDate();
+                let hour: number | string = format.getHours();
+                let minutes:number | string = format.getMinutes();
+                let second:number | string = format.getSeconds();
+
+                month = month < 10 ? ('0' + month) : month;
+                day = day < 10 ? ('0' + day) : day;
+                hour = hour < 10 ? ('0' + hour) : hour;
+                minutes = minutes < 10 ? ('0' + minutes) : minutes;
+
+                return (year + "年" + month + "月" + day + "日  " + hour + ":"+ minutes);
+            }else{
+                return '暂无数据'
+            }
+        },
+    }
 })
 export default class EventRanking extends Vue {
 
@@ -79,4 +105,16 @@ export default class EventRanking extends Vue {
 </script>
 
 <style lang="css" scoped>
+.lastUpdated{
+    text-align: right;
+    font-size: 15px;
+    padding: 20px 20px 10px;
+}
+.lastUpdated .title{
+    padding-right: 10px;
+}
+.lastUpdated .date{
+    color: #1296db;
+    font-weight: bold
+}
 </style>

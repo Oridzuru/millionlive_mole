@@ -50,13 +50,15 @@ import { Component, Vue } from 'vue-property-decorator';
             }else{
                 idata = this.$store.getters.getIdolList;
             }
-            idata.forEach((item:any) => {
-                if(item.addDate === (this as any).addIdolDate){
-                    item.headSrc = `https://storage.matsurihi.me/mltd/icon_l/${item.resourceId}_1.png`;
-                    item.flavorText = item.flavorText.replace('{$P$}','Producer');
-                    (this as any).idol.push(item);
-                }
-            });
+            if(idata){
+                idata.forEach((item:any) => {
+                    if(item.addDate === (this as any).addIdolDate){
+                        item.headSrc = `https://storage.matsurihi.me/mltd/icon_l/${item.resourceId}_1.png`;
+                        item.flavorText = item.flavorText.replace('{$P$}','Producer');
+                        (this as any).idol.push(item);
+                    }
+                });
+            }
         }
     },
 })

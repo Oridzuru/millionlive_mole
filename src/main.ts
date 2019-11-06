@@ -9,12 +9,21 @@ import elementUI from 'element-ui';
 
 import 'element-ui/lib/theme-chalk/index.css';
 
-import Echart from 'echarts';
 
+let echarts = require('echarts/lib/echarts');
+// line-charts
+require('echarts/lib/chart/line')
+// echarts-component
+require('echarts/lib/component/tooltip')
+require('echarts/lib/component/title')
+require('echarts/lib/component/legend')
+require('echarts/lib/component/legendScroll')
+require('echarts/lib/component/markArea')
+require('echarts/lib/component/markLine')
 
 Vue.use(elementUI);
 Vue.prototype.axios = axios;
-Vue.prototype.$echarts = Echart;
+Vue.prototype.$echarts = echarts
 
 Vue.config.productionTip = false;
 
