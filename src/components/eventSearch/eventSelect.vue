@@ -46,15 +46,9 @@ import { Loading } from 'element-ui';
                 item.name = item.name.replace('プラチナスターシアター','');
                 item.name = item.name.replace('プラチナスターツアー','');
             });
-            // not a fucntion?????
-            // data = data.filter((item:any)=>{
-            //     if(item.type === 3 || item.type === 4){
-            //         return item;
-            //     }
-            // })
             let arr = [];
             for(let i=0;i<data.length;i++){
-                if(data[i].type === 3 || data[i].type === 4){
+                if(data[i].type === 3 || data[i].type === 4 || data[i].type === 5){
                     arr.push(data[i])
                 }
             }

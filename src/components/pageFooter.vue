@@ -3,8 +3,8 @@
 		<div class="neo-card" style="width: auto;">
 			<div class="subTitile">关于</div>
 			<div class="neo-content">
-				<p>活动数据来源：<a href="https://matsurihi.me">https://matsurihi.me</a> 、<a href="https://si.ster.li">https://si.ster.li</a></p>
-				<p>The event data is provided by <a href="https://matsurihi.me">https://matsurihi.me</a> 、<a href="https://si.ster.li">https://si.ster.li</a></p>
+                <p><del style="color:rgba(136, 136, 136, 0.32)">大自然</del> 数据搬运工：<a href="https://weibo.com/oridzuru/">@Oridzuru</a></p>
+				<p>The data provided by <a href="https://matsurihi.me">matsurihi.me</a></p>
 			</div>
 		</div>
   </div>

@@ -41,7 +41,12 @@ import { Component, Vue } from 'vue-property-decorator';
             console.log(this.$store.getters.getIdolList.length)
             if(this.$store.getters.getIdolList.length === 0){
                 try {
-                    const {data} = await (this as any).axios(`cards`);
+                    const {data} = await Promise.race(
+                        [
+                            (this as any).axios(`http://api.serika.top/getData/cards.json`),
+                            (this as any).axios(`cards`),
+                        ]
+                    );
                     idata = data;
                     this.$store.dispatch('setIdolList', data);
                 } catch (error) {
@@ -53,7 +58,8 @@ import { Component, Vue } from 'vue-property-decorator';
             if(idata){
                 idata.forEach((item:any) => {
                     if(item.addDate === (this as any).addIdolDate){
-                        item.headSrc = `https://storage.matsurihi.me/mltd/icon_l/${item.resourceId}_1.png`;
+                        // item.headSrc = `https://storage.matsurihi.me/mltd/icon_l/${item.resourceId}_1.png`;
+                        item.headSrc = `http://static.serika.top/icon_l/${item.idolId}/${item.resourceId}_1.png`;
                         item.flavorText = item.flavorText.replace('{$P$}','Producer');
                         (this as any).idol.push(item);
                     }

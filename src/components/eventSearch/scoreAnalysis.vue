@@ -51,6 +51,7 @@ import { Component, Vue } from 'vue-property-decorator';
   },
   watch: {
     'eventId': async function(){
+      (this as any).score = [];
       (this as any).getData((this as any).eventId)
     }
   },
