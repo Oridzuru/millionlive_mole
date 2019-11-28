@@ -9,6 +9,12 @@
                         class="img"
                         :src="returnSrc(type,cardData.idolId,cardData.resourceId)" 
                         :preview-src-list="returnSrcArr(type,cardData.idolId,cardData.resourceId)">
+                        <div slot="placeholder" class="image-slot">
+                            图片加载中<span class="dot">...</span>
+                        </div>
+                        <div slot="error" class="image-slot">
+                            <i class="el-icon-picture-outline"></i>
+                        </div>
                   </el-image>
               </div>
               <div class="idoldata">
@@ -110,6 +116,13 @@ export default class CardInfo extends Vue {
                 img,.img{
                     width: 100%;
                     border-radius: 5px;
+                }
+                .image-slot{
+                    padding: 20px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: #bbb;
                 }
             }
             @media (max-width: 600px){

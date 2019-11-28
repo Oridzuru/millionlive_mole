@@ -14,7 +14,7 @@
         <router-link tag="div" class="nav-item" to="/eventSearch">历史活动</router-link>
         <router-link tag="div" class="nav-item" to="/card">卡片查询</router-link>
         <!-- <router-link tag="div" class="nav-item" to="/cardview">测试</router-link> -->
-        <div class="nav-item disable">不知道做什么..</div>
+        <div class="nav-item disable">测试..</div>
     </div>
   </div>
 </template>
