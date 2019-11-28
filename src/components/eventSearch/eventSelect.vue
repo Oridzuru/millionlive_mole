@@ -2,6 +2,13 @@
   <div class="">
        <div class="scoreBox">
             <div class="subTitile">活动查询</div>
+            <el-alert
+                title="摸了"
+                type="warning"
+                description="暂无法查询～花ざかりWeekend✿～及之前的活动数据（有空就摸完..）"
+                show-icon
+                style="margin-bottom:15px;">
+            </el-alert>
             <el-row :gutter="20" type="flex" justify="center">
                 <el-col :xs="20" :sm="20" :md="13" :lg="13" :xl="13">
                     <el-form label-width="85px">

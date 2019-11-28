@@ -10,10 +10,11 @@
         <div class="about"></div>
     </div>
     <div class="navBox">
-        <router-link  tag="div" class="nav-item" to="/">活动情况</router-link>
-        <router-link tag="div" class="nav-item" to="/eventSearch">活动查询/对比</router-link>
-        <div class="nav-item disable">敬请期待..</div>
-        <div class="nav-item disable">敬请期待..</div>
+        <router-link  tag="div" class="nav-item" to="/">当前活动</router-link>
+        <router-link tag="div" class="nav-item" to="/eventSearch">历史活动</router-link>
+        <router-link tag="div" class="nav-item" to="/card">卡片查询</router-link>
+        <!-- <router-link tag="div" class="nav-item" to="/cardview">测试</router-link> -->
+        <div class="nav-item disable">不知道做什么..</div>
     </div>
   </div>
 </template>
