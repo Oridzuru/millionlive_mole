@@ -4,7 +4,18 @@
         <div class="subTitile">活动基本信息</div>
         <div class="eventBaseInfo">
             <div class="eventImg">
-                <img :src="filtPic()">
+                <!-- <img :src="filtPic()"> -->
+                <el-image 
+                        class="img"
+                        :src="filtPic()" 
+                        :preview-src-list="[filtPic()]">
+                        <div slot="placeholder" class="image-slot">
+                            图片加载中<span class="dot">...</span>
+                        </div>
+                        <div slot="error" class="image-slot">
+                            <i class="el-icon-picture-outline"></i>
+                        </div>
+                  </el-image>
             </div>
             <div class="eventTitle">{{eventInfo.name}}</div>
             <div class="eventInfo">
@@ -127,6 +138,11 @@ export default class EventBaseInfo extends Vue {}
 </script>
 
 <style lang="css" scoped>
+.image-slot{
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+}
 .eventBaseInfo {
     padding: 10px;
 }
