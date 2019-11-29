@@ -30,11 +30,12 @@
                             cardData.visualMax+cardData.danceMax+cardData.vocalMax:cardData.visualMaxAwakened+cardData.danceMaxAwakened+cardData.vocalMaxAwakened}}
                     </div>
                     <div class="item onerow ldSkillname "><span class="lb">队长技能</span>{{cardData.centerEffectName || "---" }}</div>
-                    <div class="item onerow ldSkill"><span class="lb">技能效果</span>{{cardData.centerEffect?cardData.centerEffect.description || "---":"null"}}</div>
+                    <div class="item onerow ldSkill"><span class="lb">技能效果</span>{{cardData.centerEffect?cardData.centerEffect.description:"null"}}</div>
                     <div class="item onerow life"><span class="lb">技能</span>{{cardData.skillName}}</div>
                     <div class="item onerow life"><span class="lb">最大等级</span>{{cardData.skillLevelMax||"---"}}</div>
-                    <div class="item onerow life"><span class="lb">技能效果</span>{{cardData.skill?cardData.skill.description || "--":"null"}}</div>
-                    <div class="item onerow intro"><span class="lb">flavorText</span>{{cardData.flavorText.replace("{$P$}","Producer")}}</div>
+                    <div class="item onerow life"><span class="lb">技能效果</span>{{cardData.skill?cardData.skill[0].description:"null"}}</div>
+                    <div class="item onerow intro"><span class="lb">flavorText</span>{{type===0?cardData.flavorText.replace("{$P$}","Producer"):cardData.flavorTextAwakened.replace("{$P$}","Producer")}}</div>
+                    <div class="item onerow intro"><span class="lb">实装日期</span>{{fotmatDate(cardData.addDate)}}</div>
               </div>
           </div>
       </div>
@@ -84,6 +85,26 @@ export default class CardInfo extends Vue {
             return [`http://static.serika.top/card/${id}/${resId}_0.png`];
         }else{
             return [`http://static.serika.top/card/${id}/${resId}_1.png`];
+        }
+    }
+    fotmatDate(date:Date){
+        console.log(date);
+        if(date){
+            let formatDate = new Date (new Date(date).getTime());
+            let year: Number | String = formatDate.getFullYear();
+            let month: Number | String = formatDate.getMonth()+ 1;
+            let day :Number | String = formatDate.getDate();
+            let hour: Number | String = formatDate.getHours();
+            let minutes:Number | String = formatDate.getMinutes();
+
+            month = month < 10 ? ('0' + month) : month;
+            day = day < 10 ? ('0' + day) : day;
+            hour = hour < 10 ? ('0' + hour) : hour;
+            minutes = minutes < 10 ? ('0' + minutes) : minutes;
+
+            return (year + "年" + month + "月" + day + "日  " + hour + ":"+ minutes);
+        }else{
+            return '暂无数据'
         }
     }
 }

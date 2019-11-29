@@ -6,8 +6,12 @@
                 size="mini"
                 type="primary"
                 plain class="ctrBtn"
-                @click="backRoute">返回</el-button>
-            </div>
+                @click="backRoute">返回
+            </el-button>
+        </div>
+        <el-card shadow="hover" style="margin:0 10px;font-size:14px">
+            {{cardData[0].awakeningText}}
+        </el-card>
         <cardInfo :cardData="cardData[0]" :type="0"></cardInfo>
         <cardInfo :cardData="cardData[0]" :type="1"></cardInfo>
   </div>
