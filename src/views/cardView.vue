@@ -85,7 +85,7 @@ export default class CardView extends Vue {
       }
        @media (max-width: 600px){
             .ctrBtn{
-                top: 50px;
+                top: 10px;
             }
         }
     }
