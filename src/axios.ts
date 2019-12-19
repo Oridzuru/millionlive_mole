@@ -11,7 +11,7 @@ const instance = Axios.create({
 axiosRetry(instance, {
     retries: 5,
     // retryDelay type:function default:0
-    // retryDelay: ()=>3000 
+    retryDelay: ()=>2000 
 });
 //请求拦截器
 instance.interceptors.request.use((config) => {
