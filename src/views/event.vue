@@ -40,20 +40,29 @@ import eventScoreChart from '@/components/eventScoreChart.vue';
 
 @Component({
   async created() {
-    try {
-      const {data} = await (this as any).axios(`events`);
-      let data_count;
-      if(data[data.length - 1].type === 3 || data[data.length - 1].id === 4){
-        data_count = await (this as any).axios(`events/${data[data.length - 1].id}/rankings/summaries/eventPoint`);
-        (this as any).eventInfo.count = data_count.data[data_count.data.length - 1].count;
+    if(this.$store.getters.getEventList.length === 0){
+      try {
+        const {data} = await (this as any).axios(`events`);
+        let data_count;
+        if(data[data.length - 1].type === 3 || data[data.length - 1].id === 4){
+          data_count = await (this as any).axios(`events/${data[data.length - 1].id}/rankings/summaries/eventPoint`);
+          (this as any).eventInfo.count = data_count.data[data_count.data.length - 1].count;
+        }
+        this.$store.dispatch('changeCurEventId', data[data.length - 1].id);
+        (this as any).cureventId = data[data.length - 1].id;
+        (this as any).eventInfo = data[data.length - 1];
+        this.$store.dispatch('changeEventList', data);
+      } catch (error) {
+        this.$message("网络错误");
+        console.log(error);
       }
+    }else{
+      const data = this.$store.getters.getEventList;
       this.$store.dispatch('changeCurEventId', data[data.length - 1].id);
       (this as any).cureventId = data[data.length - 1].id;
       (this as any).eventInfo = data[data.length - 1];
-    } catch (error) {
-      this.$message("网络错误");
-      console.log(error);
     }
+    
   },
   data() {
     return {

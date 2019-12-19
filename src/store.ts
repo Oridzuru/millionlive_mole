@@ -5,12 +5,16 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    eventList: [],
     cur_eventId: 0,
     isLoading: false,
     cur_slectEventId: 0,
     idolList: [],
   },
   mutations: {
+    updateEventList: (state, eventList) => {
+      state.eventList = eventList;
+    },
     updateCurEventId: (state,eventId)=>{
       state.cur_eventId = eventId;
     },
@@ -26,6 +30,9 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    changeEventList(context, ev) {
+      context.commit("updateEventList", ev)
+    },
     changeCurEventId(context, ev) {
       context.commit("updateCurEventId", ev)
     },
@@ -40,6 +47,9 @@ export default new Vuex.Store({
     },
   },
   getters: {
+    getEventList: (state) => {
+      return state.eventList;
+    },
     loadingStatus: (state) => {
       return state.isLoading;
     },

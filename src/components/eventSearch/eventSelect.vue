@@ -47,28 +47,45 @@ import { Loading } from 'element-ui';
 
 @Component({
     async created() {
-         try {
-            let {data} = await (this as any).axios(`events`);
-            data.forEach((item:any) => {
-                item.name = item.name.replace('プラチナスターシアター','');
-                item.name = item.name.replace('プラチナスターツアー','');
-            });
-            let arr = [];
-            for(let i=0;i<data.length;i++){
-                if(data[i].type === 3 || data[i].type === 4 || data[i].type === 5){
-                    arr.push(data[i])
-                }
+        if(this.$store.getters.getEventList.length === 0){
+            try {
+                let {data} = await (this as any).axios(`events`);
+                (this as any).tempList = data;
+            }catch(error){
+                this.$message("网络错误");
+                console.log(error);
             }
-            (this as any).eventList = arr;
-        } catch (error) {
-            this.$message("网络错误");
-            console.log(error);
+        }else{
+            (this as any).tempList = this.$store.getters.getEventList;
         }
+        (this as any).eventList = (this as any).tempList.filter((item:any)=>{
+            item.name = item.name.replace('プラチナスターシアター','');
+            item.name = item.name.replace('プラチナスターツアー','');
+            return item.type===3 || item.type===4 || item.type===5
+        })
+        //  try {
+        //     let {data} = await (this as any).axios(`events`);
+        //     data.forEach((item:any) => {
+        //         item.name = item.name.replace('プラチナスターシアター','');
+        //         item.name = item.name.replace('プラチナスターツアー','');
+        //     });
+        //     let arr = [];
+        //     for(let i=0;i<data.length;i++){
+        //         if(data[i].type === 3 || data[i].type === 4 || data[i].type === 5){
+        //             arr.push(data[i])
+        //         }
+        //     }
+        //     (this as any).eventList = arr;
+        // } catch (error) {
+        //     this.$message("网络错误");
+        //     console.log(error);
+        // }
     },
     data() {
         return {
             eventList: [],
             select: null,
+            tempList: []
         }
     },
     methods: {
