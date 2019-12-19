@@ -1,75 +1,75 @@
 <template>
   <div class="">
     <div class="scoreBox" v-if="idol.length > 0">
-        <div class="subTitile">活动角色</div>
+        <div class="subTitile">同期实装角色</div>
         <div class="viewidol">
-            <div class="idolCt" v-for="item in idol" :key="item.id">
+            <router-link tag="div" class="idolCt" v-for="item in idol" :key="item.id" :to="`cardview/${item.id}`">
                 <img class="idolHead" :src="item.headSrc">
                 <div class="idolInfo">
                     <div class="idolName">{{item.name}}</div>
                     <div class="idolTxt">{{item.flavorText}}</div>
                 </div>
-            </div>
+            </router-link>
         </div>
     </div>	
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Prop, Watch} from 'vue-property-decorator';
 
 @Component({
-    props:['cureventId','addIdolDate'],
-    async created() {
-        (this as any).getData();
-    },
-    data() {
-        return {
-            idol:[]
-        }
-    },
-    watch:{
-        'addIdolDate': function(){
-            (this as any).getData();
-        }
-    },
-    methods: {
-        async getData(){
-            let curEventId = (this as any).cureventId;
-            let idata;
-            (this as any).idol = [];
-            console.log(this.$store.getters.getIdolList.length)
-            if(this.$store.getters.getIdolList.length === 0){
-                try {
-                    const {data} = await Promise.race(
-                        [
-                            (this as any).axios(`http://api.serika.top/getData/cards.json`),
-                            (this as any).axios(`cards`),
-                        ]
-                    );
-                    idata = data;
-                    this.$store.dispatch('setIdolList', data);
-                } catch (error) {
-                    this.$message("网络出错");
-                }
-            }else{
-                idata = this.$store.getters.getIdolList;
-            }
-            if(idata){
-                idata.forEach((item:any) => {
-                    if(item.addDate === (this as any).addIdolDate){
-                        // item.headSrc = `https://storage.matsurihi.me/mltd/icon_l/${item.resourceId}_1.png`;
-                        item.headSrc = `http://static.serika.top/icon_l/${item.idolId}/${item.resourceId}_1.png`;
-                        item.flavorText = item.flavorText.replace('{$P$}','Producer');
-                        (this as any).idol.push(item);
-                    }
-                });
-            }
-        }
-    },
+
 })
 export default class EventIdol extends Vue {
+    @Prop({required: true})
+    cureventId!: Number;
 
+    @Prop({required: true})
+    addIdolDate!: any;
+
+    private idol:Array<Object> = [];
+    private idata:Array<Object> = [];
+
+    async created() {
+        this.getData();
+    }
+
+    async getData(){
+        let curEventId = this.cureventId;
+        this.idol = [];
+        if(this.$store.getters.getIdolList.length === 0){
+            try {
+                const {data} = await Promise.race(
+                    [
+                        (this as any).axios(`http://api.serika.top/getData/cards.json`),
+                        (this as any).axios(`cards`),
+                    ]
+                );
+                this.idata = data;
+                this.$store.dispatch('setIdolList', data);
+            } catch (error) {
+                this.$message("网络出错");
+            }
+        }else{
+            this.idata = this.$store.getters.getIdolList;
+        }
+        if(this.idata){
+            this.idata.forEach((item:any) => {
+                if(item.addDate === (this as any).addIdolDate){
+                    // item.headSrc = `https://storage.matsurihi.me/mltd/icon_l/${item.resourceId}_1.png`;
+                    item.headSrc = `http://static.serika.top/icon_l/${item.idolId}/${item.resourceId}_1.png`;
+                    item.flavorText = item.flavorText.replace('{$P$}','Producer');
+                    (this as any).idol.push(item);
+                }
+            });
+        }
+    }
+
+    @Watch('addIdolDate')
+    findIdol(){
+        this.getData();
+    }
 }
 </script>
 
@@ -85,6 +85,14 @@ export default class EventIdol extends Vue {
     justify-content: space-between;
     width: 50%;
     margin-bottom: 10px;
+    cursor: pointer;
+}
+.viewidol >.idolCt:hover{
+    filter: opacity(.7);
+    transition: .2s;
+}
+.viewidol >.idolCt:hover >.idolInfo{
+    color: #567cf2;
 }
 .viewidol >.idolCt >.idolHead {
     width: 70px;
